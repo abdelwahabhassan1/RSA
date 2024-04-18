@@ -3,6 +3,7 @@ import math
 import time
 
 take_bits = int(input("How many bits do you want: "))
+message = int(input("Enter message: "))
 
 def is_prime(n):
     if n <= 1:
@@ -24,7 +25,7 @@ def generate_prime(bits):
         if num % 2 != 0:
             if is_prime(num):
                 return num
-            
+
 def gcd(a, b):
     while b != 0:
         a, b = b, a % b
@@ -35,4 +36,25 @@ def extended_gcd(a, b):
         return b, 0, 1
     else:
         gcd, x, y = extended_gcd(b % a, a)
-        return gcd, y - (b // a) * x, x            
+        return gcd, y - (b // a) * x, x
+
+def generate_keys(bits):
+    start_time = time.perf_counter() # Start measuring time
+    p = generate_prime(bits // 2 + 1)
+    q = generate_prime(bits - (bits // 2 + 1))
+    
+    n = p * q
+    phi = (p - 1) * (q - 1)
+    e = random.randrange(1, phi)
+    while gcd(e, phi) != 1:
+        e = random.randrange(1, phi)
+
+    _, d, _ = extended_gcd(e, phi)
+    d %= phi
+    if d < 0:
+        d += phi
+    end_time = time.perf_counter()
+    public_key = (n, e)
+    private_key = (n, d)
+    return public_key, private_key, end_time - start_time
+          
