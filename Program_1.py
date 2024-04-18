@@ -66,4 +66,13 @@ def factor_modulus(N):
             p = i
             q = N // i
             return p, q
-    return None, None              
+    return None, None    
+def encrypt(message, public_key):
+    n, e = public_key
+    encrypted_message = pow(message, e, n)
+    return encrypted_message
+
+def decrypt(encrypted_message, private_key):
+    n, d = private_key
+    decrypted_message = pow(encrypted_message, d, n)
+    return decrypted_message          
