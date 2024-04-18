@@ -24,3 +24,15 @@ def generate_prime(bits):
         if num % 2 != 0:
             if is_prime(num):
                 return num
+            
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def extended_gcd(a, b):
+    if a == 0:
+        return b, 0, 1
+    else:
+        gcd, x, y = extended_gcd(b % a, a)
+        return gcd, y - (b // a) * x, x            
