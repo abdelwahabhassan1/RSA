@@ -57,4 +57,13 @@ def generate_keys(bits):
     public_key = (n, e)
     private_key = (n, d)
     return public_key, private_key, end_time - start_time
-          
+
+
+def factor_modulus(N):
+    sqrt_N = int(math.sqrt(N)) + 1
+    for i in range (2, sqrt_N):
+        if N % i == 0:
+            p = i
+            q = N // i
+            return p, q
+    return None, None              
