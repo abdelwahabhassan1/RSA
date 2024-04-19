@@ -76,3 +76,23 @@ def decrypt(encrypted_message, private_key):
     n, d = private_key
     decrypted_message = pow(encrypted_message, d, n)
     return decrypted_message          
+
+def main():
+    if take_bits == 8: 
+        # Test with 8-bit RSA key
+        print("Generating 8-bit RSA keys...")
+        public_key, private_key, key_gen_time = generate_keys(8)
+        print("Public key (N, e):", public_key)
+        print("Private key (N, d):", private_key)
+        print("Key generation time:", key_gen_time, "seconds")
+        print()
+    elif take_bits == 16:
+        # Test with 16-bit RSA key
+        print("Generating 16-bit RSA keys...")
+        public_key, private_key, key_gen_time = generate_keys(16)
+        print("Public key (N, e):", public_key)
+        print("Private key (N, d):", private_key)
+        print("Key generation time:", key_gen_time, "seconds")
+        print()
+    else: 
+        exit()
