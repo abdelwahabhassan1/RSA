@@ -102,3 +102,13 @@ def main():
     print("Encrypted message:", encrypted_message)
     decrypted_message = decrypt(encrypted_message, private_key)
     print("Decrypted message:", decrypted_message)        
+
+    
+    p, q = factor_modulus(public_key[0])
+    if p and q:
+        print("Modulus factored successfully. p =", p, ", q =", q)
+    else:
+        print("Failed to factorize modulus.")
+
+if __name__ == "__main__":
+    main()
