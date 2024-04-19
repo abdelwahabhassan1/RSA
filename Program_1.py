@@ -96,3 +96,9 @@ def main():
         print()
     else: 
         exit()
+  #test encryption and decryption
+    print("Original message:", message)
+    encrypted_message = encrypt(message, public_key)
+    print("Encrypted message:", encrypted_message)
+    decrypted_message = decrypt(encrypted_message, private_key)
+    print("Decrypted message:", decrypted_message)        
