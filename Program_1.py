@@ -2,10 +2,10 @@ import random
 import math
 import time
 
-take_bits = int(input("How many bits do you want: "))
+take_bits = int(input("How many bits do you want: ")) #to prompt the user to input the number of bits and number of original messages to be encrypted.
 message = int(input("Enter message: "))
 
-def is_prime(n):
+def is_prime(n):    #check if its prime
     if n <= 1:
         return False
     if n <= 3:
@@ -19,19 +19,19 @@ def is_prime(n):
         i += 6
     return True
 
-def generate_prime(bits):
+def generate_prime(bits):     #generates the prime number with the specified number of bits
     while True:
         num = random.getrandbits(bits)
         if num % 2 != 0:
             if is_prime(num):
                 return num
 
-def gcd(a, b):
-    while b != 0:
+def gcd(a, b):            #greates common divisor
+    while b != 0:              #using euclidean method
         a, b = b, a % b
     return a
 
-def extended_gcd(a, b):
+def extended_gcd(a, b):   
     if a == 0:
         return b, 0, 1
     else:
@@ -44,7 +44,7 @@ def generate_keys(bits):
     q = generate_prime(bits - (bits // 2 + 1))
     
     n = p * q
-    phi = (p - 1) * (q - 1)
+    phi = (p - 1) * (q - 1)    #mathematical equ
     e = random.randrange(1, phi)
     while gcd(e, phi) != 1:
         e = random.randrange(1, phi)
@@ -59,7 +59,7 @@ def generate_keys(bits):
     return public_key, private_key, end_time - start_time
 
 
-def factor_modulus(N):
+def factor_modulus(N):    #fn to get (p,Q)
     sqrt_N = int(math.sqrt(N)) + 1
     for i in range (2, sqrt_N):
         if N % i == 0:
@@ -103,7 +103,7 @@ def main():
     decrypted_message = decrypt(encrypted_message, private_key)
     print("Decrypted message:", decrypted_message)        
 
-    
+    #test p and q
     p, q = factor_modulus(public_key[0])
     if p and q:
         print("Modulus factored successfully. p =", p, ", q =", q)
