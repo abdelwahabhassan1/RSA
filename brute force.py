@@ -30,3 +30,28 @@ def generate_rsa_keys(bit_size):      # Generate two random prime numbers p and 
         e = random.randrange(2, phi)
     d = mod_inverse(e, phi)         # Calculate private exponent d using the modular inverse of e mod phi
     return (N, e), (N, d)              # Return public and private keys
+
+ #Function to test brute force attack
+def test_brute_force_attack(N, e):
+    print("Original private exponent (d):", e)
+    found_d = brute_force_private_exponent(N, e)
+    if found_d is not None:
+        print("Brute force found private exponent (d):", found_d)
+    else:
+        print("Brute force attack failed. Unable to find private exponent (d).")
+
+# Example usage
+bit_size_8 = 8
+bit_size_16 = 16
+
+print("Testing RSA with 8-bit key size:")
+public_key, private_key = generate_rsa_keys(bit_size_8)
+print("Public Key (N, e):", public_key)
+print("Private Key (N, d):", private_key)
+test_brute_force_attack(*private_key)
+
+print("Testing RSA with 16-bit key size:")
+public_key, private_key = generate_rsa_keys(bit_size_16)
+print("Public Key (N, e):", public_key)
+print("Private Key (N, d):", private_key)
+test_brute_force_attack(*private_key)
